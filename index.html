@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Full-Speed Agility Session</title>
+  <style>
+    :root {
+      --navy: #0f2747;
+      --blue: #1d4ed8;
+      --sky: #dff4ff;
+      --green: #1f8f52;
+      --mint: #e9fff0;
+      --ink: #122033;
+      --soft: #5b6b7f;
+      --line: #dce6ef;
+      --card: #ffffff;
+      --bg: #f7fafc;
+      --accent: #ffb300;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    a { color: inherit; }
+    .hero {
+      background: linear-gradient(135deg, #0f2747 0%, #163761 55%, #255899 100%);
+      color: #fff;
+      padding: 44px 24px 30px;
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 26px;
+      align-items: start;
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1.2px;
+      opacity: 0.85;
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      max-width: 860px;
+      margin: 14px 0 18px;
+      font-size: 18px;
+      color: #d8e9ff;
+    }
+    .meta, .hero-tips ul, .quick-list, .activity-copy ul, .schedule ul { padding-left: 20px; }
+    .meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .pill {
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .hero-tips {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 22px;
+      padding: 18px 18px 16px;
+      backdrop-filter: blur(4px);
+    }
+    .hero-tips h3 { margin: 0 0 12px; font-size: 20px; }
+    .hero-tips li { margin: 8px 0; color: #eef5ff; }
+
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 14px 20px;
+      justify-content: center;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+    .topnav a {
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #eef5fb;
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    main { max-width: 1200px; margin: 0 auto; padding: 26px 18px 70px; }
+    .section { margin-top: 28px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 62px 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+    .section-head span {
+      width: 62px; height: 62px;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      font-weight: 800;
+    }
+    .section-head h2 { margin: 0 0 6px; font-size: 34px; color: var(--navy); }
+    .section-head p { margin: 0; color: var(--soft); font-size: 17px; }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .overview-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 16px;
+      box-shadow: 0 10px 24px rgba(15,39,71,0.06);
+    }
+    .overview-card strong { display: block; font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+    .overview-card span { color: var(--soft); font-size: 15px; }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .quick-box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 24px rgba(15,39,71,0.06);
+    }
+    .quick-box h3 { margin: 0 0 10px; color: var(--navy); }
+    .quick-box li { margin: 8px 0; color: var(--ink); }
+
+    .activity-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 10px 24px rgba(15,39,71,0.06);
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .activity-card img { width: 100%; height: 100%; object-fit: cover; background: #eef3f8; }
+    .activity-copy { padding: 20px 22px 22px; }
+    .label {
+      display: inline-block;
+      background: var(--mint);
+      color: var(--green);
+      border: 1px solid #c9eed6;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      margin-bottom: 10px;
+    }
+    .activity-copy h3 { margin: 0 0 8px; font-size: 31px; color: var(--navy); }
+    .activity-copy p { margin: 10px 0; color: var(--ink); }
+    .activity-copy li { margin: 7px 0; }
+    .note {
+      background: #f8fbff;
+      border: 1px solid #dceafb;
+      border-radius: 16px;
+      padding: 14px 15px;
+      margin-top: 12px;
+      color: var(--soft);
+    }
+    .video-wrap {
+      margin-top: 14px;
+      background: #edf4fb;
+      border-radius: 16px;
+      padding: 12px;
+      border: 1px solid #d7e7f8;
+    }
+    video {
+      width: 100%;
+      max-height: 460px;
+      border-radius: 14px;
+      background: #000;
+      display: block;
+    }
+    .schedule {
+      background: #fff9e7;
+      border: 1px solid #f6df92;
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin-top: 14px;
+    }
+    .schedule h4 { margin: 0 0 10px; color: #6c5000; font-size: 20px; }
+    .flow {
+      margin-top: 18px;
+      padding: 18px 20px;
+      background: linear-gradient(180deg,#f0f8ff,#ffffff);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+    .flow span, .flow b {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+    .flow span { background: #e8f3ff; color: var(--navy); font-weight: 700; }
+    .flow b { color: var(--soft); }
+    footer {
+      margin-top: 40px;
+      padding: 24px 18px 40px;
+      text-align: center;
+      color: var(--soft);
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 980px) {
+      .hero-inner, .quick-grid, .activity-card, .overview-grid { grid-template-columns: 1fr; }
+      .activity-card img { max-height: 340px; }
+      .section-head { grid-template-columns: 52px 1fr; }
+      .section-head span { width: 52px; height: 52px; font-size: 24px; }
+      .section-head h2 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">Soccer speed and agility session</p>
+        <h1>Full-Speed Agility Session</h1>
+        <p class="subtitle">A high-speed session that starts with pogo jumps, moves through the 5 shared agility videos, and finishes with a competitive 2-player 1v1 activity. Built for fast feet, sharp change of direction, and full-speed effort.</p>
+        <div class="meta-wrap">
+          <span class="pill">6 main activities + 1v1 finisher</span>
+          <span class="pill">Each activity: 3 reps</span>
+          <span class="pill">Finish: 11 min 1v1 block</span>
+          <span class="pill">Focus: quick feet, acceleration, COD</span>
+        </div>
+      </div>
+      <aside class="hero-tips">
+        <h3>Session standards</h3>
+        <ul>
+          <li>Every rep should be fast and sharp.</li>
+          <li>Recover enough so the next rep still looks explosive.</li>
+          <li>Stay low through the cuts and drive out of the plant foot.</li>
+          <li>Eyes up, arms active, and finish through the line.</li>
+          <li>For the 1v1 block, compete hard but keep the work organized.</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="topnav">
+    <a href="#overview">Overview</a>
+    <a href="#activities">Activities</a>
+    <a href="#finisher">1v1 Finisher</a>
+    <a href="#notes">Coaching Notes</a>
+  </nav>
+
+  <main>
+    <section id="overview" class="section">
+      <div class="section-head">
+        <span>1</span>
+        <div>
+          <h2>Session Overview</h2>
+          <p>Run the session in order. The jump work prepares the ankles and feet, then the training videos progress into sharper lateral movement, sprint transitions and curved acceleration.</p>
+        </div>
+      </div>
+
+      <div class="overview-grid">
+        <div class="overview-card"><strong>Activity 1</strong><span>Pogo jumps</span></div>
+        <div class="overview-card"><strong>Activity 2</strong><span>Video 1 - hurdle quickness</span></div>
+        <div class="overview-card"><strong>Activity 3</strong><span>Video 2 - lateral quick feet</span></div>
+        <div class="overview-card"><strong>Activity 4</strong><span>Video 3 - lateral shuffle to sprint</span></div>
+        <div class="overview-card"><strong>Activity 5</strong><span>Video 4 - sprint shuffle sprint</span></div>
+        <div class="overview-card"><strong>Activity 6</strong><span>Video 5 - curved sprint</span></div>
+        <div class="overview-card"><strong>Finish</strong><span>2-player 1v1</span></div>
+        <div class="overview-card"><strong>Work target</strong><span>3 reps per activity</span></div>
+      </div>
+
+      <div class="quick-grid">
+        <div class="quick-box">
+          <h3>How to run it</h3>
+          <ul class="quick-list">
+            <li><strong>Activities 1-6:</strong> complete 3 quality reps each.</li>
+            <li><strong>Rest:</strong> use about 30-45 seconds between reps and 60 seconds when athletes need extra recovery.</li>
+            <li><strong>Intensity:</strong> this is a full-speed session, so keep the efforts explosive.</li>
+            <li><strong>Coaching priority:</strong> posture first, then foot speed, then acceleration out of the movement.</li>
+          </ul>
+        </div>
+        <div class="quick-box">
+          <h3>Main coaching cues</h3>
+          <ul class="quick-list">
+            <li>Stay on the balls of the feet.</li>
+            <li>Arms drive fast and help the body turn.</li>
+            <li>Lower the hips before the cut.</li>
+            <li>Push the ground away on the first step.</li>
+            <li>Accelerate through the finish, not just to it.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow">
+        <span>Pogo Jumps</span><b>></b>
+        <span>Hurdle Quickness</span><b>></b>
+        <span>Lateral Quick Feet</span><b>></b>
+        <span>Lateral Shuffle to Sprint</span><b>></b>
+        <span>Sprint Shuffle Sprint</span><b>></b>
+        <span>Curved Sprint</span><b>></b>
+        <span>2-Player 1v1</span>
+      </div>
+    </section>
+
+    <section id="activities" class="section">
+      <div class="section-head">
+        <span>2</span>
+        <div>
+          <h2>Main Activities</h2>
+          <p>Use the visuals to help the athlete understand what each drill should look like. The videos are embedded directly from the files you shared.</p>
+        </div>
+      </div>
+
+      <article class="activity-card">
+        <img src="assets/images/pogo_jumps.png" alt="Pogo jumps visual" />
+        <div class="activity-copy">
+          <div class="label">Activity 1</div>
+          <h3>Pogo Jumps</h3>
+          <ul>
+            <li><strong>Reps:</strong> 3 x 10-12 contacts</li>
+            <li><strong>Goal:</strong> wake up the ankles, feet and lower legs before the speed work</li>
+            <li><strong>Focus:</strong> very short ground contact and a tall body line</li>
+          </ul>
+          <p><strong>Coaching cues:</strong> stay tall, keep the knees fairly quiet, bounce off the ground, and keep the contacts quick.</p>
+          <div class="note"><strong>Why it starts the session:</strong> pogo jumps prepare the athlete for the quick elastic contacts needed in the rest of the agility work.</div>
+        </div>
+      </article>
+
+      <article class="activity-card">
+        <img src="assets/images/hurdle_quickness.jpg" alt="Hurdle quickness visual" />
+        <div class="activity-copy">
+          <div class="label">Activity 2 - Video 1</div>
+          <h3>Hurdle Quickness</h3>
+          <ul>
+            <li><strong>Reps:</strong> 3 runs</li>
+            <li><strong>Goal:</strong> move the feet quickly while staying organized over the hurdles</li>
+            <li><strong>Focus:</strong> fast steps, balance, and quick exit after the last hurdle</li>
+          </ul>
+          <p><strong>Coaching cues:</strong> lift the feet just enough, keep the torso stable, and accelerate immediately once clear.</p>
+          <div class="video-wrap">
+            <video controls playsinline preload="metadata" poster="assets/images/hurdle_quickness.jpg">
+              <source src="assets/videos/01_hurdle_quickness.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </article>
+
+      <article class="activity-card">
+        <img src="assets/images/lateral_quick_feet.jpg" alt="Lateral quick feet visual" />
+        <div class="activity-copy">
+          <div class="label">Activity 3 - Video 2</div>
+          <h3>Lateral Quick Feet</h3>
+          <ul>
+            <li><strong>Reps:</strong> 3 reps</li>
+            <li><strong>Goal:</strong> teach fast side-to-side foot action under control</li>
+            <li><strong>Focus:</strong> stay low, keep the feet active, and avoid heavy contacts</li>
+          </ul>
+          <p><strong>Coaching cues:</strong> quick feet, hips level, and keep the body centered instead of leaning too far side to side.</p>
+          <div class="video-wrap">
+            <video controls playsinline preload="metadata" poster="assets/images/lateral_quick_feet.jpg">
+              <source src="assets/videos/02_lateral_quick_feet.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </article>
+
+      <article class="activity-card">
+        <img src="assets/images/lateral_shuffle_to_sprint.jpg" alt="Lateral shuffle to sprint visual" />
+        <div class="activity-copy">
+          <div class="label">Activity 4 - Video 3</div>
+          <h3>Lateral Shuffle to Sprint</h3>
+          <ul>
+            <li><strong>Reps:</strong> 3 reps each way if space allows</li>
+            <li><strong>Goal:</strong> transition from lateral movement into forward acceleration</li>
+            <li><strong>Focus:</strong> clean plant and powerful first 2 steps out of the shuffle</li>
+          </ul>
+          <p><strong>Coaching cues:</strong> stay low in the shuffle, load the outside foot, then explode into the sprint without popping up.</p>
+          <div class="video-wrap">
+            <video controls playsinline preload="metadata" poster="assets/images/lateral_shuffle_to_sprint.jpg">
+              <source src="assets/videos/03_lateral_shuffle_to_sprint.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </article>
+
+      <article class="activity-card">
+        <img src="assets/images/sprint_shuffle_sprint.jpg" alt="Sprint shuffle sprint visual" />
+        <div class="activity-copy">
+          <div class="label">Activity 5 - Video 4</div>
+          <h3>Sprint - Shuffle - Sprint</h3>
+          <ul>
+            <li><strong>Reps:</strong> 3 runs</li>
+            <li><strong>Goal:</strong> sprint, organize the feet, shuffle under control, then re-accelerate</li>
+            <li><strong>Focus:</strong> body control in transition and an explosive restart</li>
+          </ul>
+          <p><strong>Coaching cues:</strong> brake under control, keep the feet under the hips, and push hard into the second sprint.</p>
+          <div class="video-wrap">
+            <video controls playsinline preload="metadata" poster="assets/images/sprint_shuffle_sprint.jpg">
+              <source src="assets/videos/04_sprint_shuffle_sprint.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </article>
+
+      <article class="activity-card">
+        <img src="assets/images/curved_sprint.jpg" alt="Curved sprint visual" />
+        <div class="activity-copy">
+          <div class="label">Activity 6 - Video 5</div>
+          <h3>Curved Sprint</h3>
+          <ul>
+            <li><strong>Reps:</strong> 3 reps each side</li>
+            <li><strong>Goal:</strong> accelerate while running a curve and keeping control of the body line</li>
+            <li><strong>Focus:</strong> forward lean, body tilt into the curve, and speed out of the final step</li>
+          </ul>
+          <p><strong>Coaching cues:</strong> lean slightly into the curve, pump the arms, and keep sprinting through the line instead of slowing early.</p>
+          <div class="video-wrap">
+            <video controls playsinline preload="metadata" poster="assets/images/curved_sprint.jpg">
+              <source src="assets/videos/05_curved_sprint.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="finisher" class="section">
+      <div class="section-head">
+        <span>3</span>
+        <div>
+          <h2>Competitive Finisher - 2-Player 1v1</h2>
+          <p>Finish by applying the speed work in a live soccer action. The goal is to attack space, react under pressure and compete at full speed.</p>
+        </div>
+      </div>
+
+      <article class="activity-card">
+        <img src="assets/images/one_v_one_diagram.svg" alt="2-player 1v1 diagram" />
+        <div class="activity-copy">
+          <div class="label">Final activity</div>
+          <h3>2-Player 1v1 Soccer Activity</h3>
+          <ul>
+            <li><strong>Format:</strong> one attacker, one defender, attack the goal at speed</li>
+            <li><strong>Coaching focus:</strong> quick first step, speed change, body feint, protect the ball, recover fast on defense</li>
+            <li><strong>Intensity:</strong> competitive and game-like</li>
+          </ul>
+          <p><strong>Simple setup:</strong> attacker starts with the ball, defender closes space, play is live to goal. Rotate after each action.</p>
+          <div class="schedule">
+            <h4>11-minute block</h4>
+            <ul>
+              <li>Round 1 - 2:00 live, 0:30 rest</li>
+              <li>Round 2 - 2:00 live, 0:30 rest</li>
+              <li>Round 3 - 2:00 live, 0:30 rest</li>
+              <li>Round 4 - 2:00 live, 0:30 rest</li>
+              <li>Round 5 - final 1:00 live</li>
+            </ul>
+          </div>
+          <div class="note"><strong>Main cue:</strong> attack hard, react quickly, and use the speed from the earlier drills to beat the defender or recover.</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="notes" class="section">
+      <div class="section-head">
+        <span>4</span>
+        <div>
+          <h2>Coaching Notes</h2>
+          <p>Keep the quality high. This session works best when every rep looks sharp and explosive.</p>
+        </div>
+      </div>
+      <div class="quick-grid">
+        <div class="quick-box">
+          <h3>For younger athletes</h3>
+          <ul class="quick-list">
+            <li>Show the visual first, then demo the rep, then let them go.</li>
+            <li>Keep lines short so the athlete stays engaged.</li>
+            <li>Use simple words: quick feet, low hips, push and go.</li>
+            <li>Stop and reset if the athlete loses posture or control.</li>
+          </ul>
+        </div>
+        <div class="quick-box">
+          <h3>Best reminders</h3>
+          <ul class="quick-list">
+            <li>Arms help the feet move faster.</li>
+            <li>Good cuts start with lower hips.</li>
+            <li>Fast does not mean sloppy.</li>
+            <li>Rest enough to stay explosive.</li>
+            <li>Finish the session by competing.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>Full-Speed Agility Session</strong><br/>
+    Pogo jumps into 5 agility video activities, then a competitive 2-player 1v1 finish.
+  </footer>
+</body>
+</html>
