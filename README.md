@@ -1,18 +1,13 @@
-# Full-Speed Agility Session
+# Full-Speed Agility Session - Updated
 
 Open `index.html` in a browser.
 
-This package includes:
-- 1 full webpage
-- 5 provided agility videos
-- visual references for each activity
-- a final 2-player 1v1 finisher diagram
-
-Session flow:
-1. Pogo jumps
-2. Hurdle quickness
-3. Lateral quick feet
-4. Lateral shuffle to sprint
-5. Sprint - shuffle - sprint
-6. Curved sprint
-7. 2-player 1v1 finisher
+Updated version includes:
+- revised pogo warm-up visual
+- 12 two-foot pogos x 3 sets
+- 10 right-foot pogos x 2 sets
+- 10 left-foot pogos x 2 sets
+- 10 side-to-side jumps x 2 sets
+- clearer athlete-friendly reminders
+- 5 shared agility videos
+- final 2-player 1v1 finisher
